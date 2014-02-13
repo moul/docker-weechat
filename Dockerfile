@@ -1,6 +1,8 @@
 FROM moul/tmux
 MAINTAINER Manfred Touron m@42.am
 
+# Inspired by https://github.com/creack/weechat-docker/blob/master/Dockerfile
+
 RUN apt-get update && \
     apt-get -qq -y install python-software-properties && \
     add-apt-repository ppa:nesthib/weechat-stable && \
@@ -18,4 +20,6 @@ VOLUME ["/weechat/.weechat"]
 RUN useradd -m -d /weechat weechat
 ADD command /root/command
 
-EXPOSE 8000
+EXPOSE 8000 8001
+
+CMD ["run-docker-tmux"]
