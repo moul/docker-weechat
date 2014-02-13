@@ -1,1 +1,1 @@
-weechat-curses
+su weechat -c weechat-curses
