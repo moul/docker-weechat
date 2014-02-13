@@ -1,14 +1,7 @@
-FROM ubuntu
+FROM moul/tmux
 MAINTAINER Manfred Touron m@42.am
 
-RUN echo "deb http://archive.ubuntu.com/ubuntu/ precise main universe" >> /etc/apt/sources.list
-RUN apt-get -q -y update
-RUN apt-get install -y openssh-server weechat tmux
-RUN mkdir /var/run/sshd
-RUN echo "root:root" | chpasswd
-EXPOSE 22
-RUN useradd -m docker
-
-ADD bashrc /root/.bashrc
-
-CMD ["/usr/sbin/sshd", "-D"]
+RUN apt-get -qq -y update && \
+    apt-get -qq -y install weechat
+RUN useradd -m -d /weechat weechat
+ADD command /root/command
